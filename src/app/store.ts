@@ -1,5 +1,5 @@
 import { IContact } from "./contact-book/contact";
-import { TOGGLE_FAVORITE } from './actions';
+import { TOGGLE_FAVORITE, LOAD_CONTACTS } from './actions';
 
 export interface IAppState {
     contactBook: IContact[];
@@ -24,6 +24,12 @@ export function rootReducer(state, action) {
                     ]
                 }
             )
+        case LOAD_CONTACTS:
+            
+            console.log("HOLA: " + action.contacts.tostring());
+            return Object.assign({}, state, {
+                contactBook: state.contactBook.contact(Object.assign({}, action.contacts))
+            })
         default:
             return state;
     }

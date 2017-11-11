@@ -1,1 +1,2 @@
 export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
+export const LOAD_CONTACTS = 'LOAD_CONTACTS';
