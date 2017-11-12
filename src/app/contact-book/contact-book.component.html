@@ -1,3 +1,7 @@
 <p>
   contact-book works! 
 </p>
+<p>
+  {{(contactBook | async)[0]?.name }}
+</p>
+<button (click)="testFav()" type="button" class="btn">Basic</button>

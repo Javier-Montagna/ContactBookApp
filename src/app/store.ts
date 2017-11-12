@@ -25,10 +25,8 @@ export function rootReducer(state, action) {
                 }
             )
         case LOAD_CONTACTS:
-            
-            console.log("HOLA: " + action.contacts.tostring());
             return Object.assign({}, state, {
-                contactBook: state.contactBook.contact(Object.assign({}, action.contacts))
+                contactBook: state.contactBook.contact = Object.assign({}, action.contacts)
             })
         default:
             return state;

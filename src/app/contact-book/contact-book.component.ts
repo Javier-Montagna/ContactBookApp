@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ContactBookService } from './contact-book-service';
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from '../store';
-import { LOAD_CONTACTS } from '../actions';
+import { LOAD_CONTACTS, TOGGLE_FAVORITE } from '../actions';
 import { IContact } from './contact';
 
 @Component({
@@ -12,9 +12,7 @@ import { IContact } from './contact';
   encapsulation: ViewEncapsulation.None
 })
 export class ContactBookComponent implements OnInit {
-
-  _errorMessage: string;
-  _contactsToAdd: IContact[];
+  @select() contactBook: IContact[];
 
   constructor(
     private _contactBookService: ContactBookService,
@@ -23,14 +21,12 @@ export class ContactBookComponent implements OnInit {
 
   ngOnInit() {
     this._contactBookService.getContactBookList().subscribe(data => {
-      console.log("Data from server: " + data);
-      this._contactsToAdd = data;
+      this.ngRedux.dispatch({ type: LOAD_CONTACTS, contacts: data });
     });
-
-    console.log("Datos: " + JSON.stringify(this._contactsToAdd));
-
-    this.ngRedux.dispatch({ type: LOAD_CONTACTS, contacts: this._contactsToAdd })
-
   }
 
+  testFav(){
+    console.log("SDSDSD");
+    this.ngRedux.dispatch({ type: TOGGLE_FAVORITE, id: 13 });
+  }
 }
