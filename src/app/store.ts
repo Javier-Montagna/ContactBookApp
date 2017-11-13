@@ -1,11 +1,15 @@
 import { IContact } from "./contact-book/contact";
-import { TOGGLE_FAVORITE, LOAD_CONTACTS } from './actions';
+import { TOGGLE_FAVORITE, LOAD_CONTACTS, UPDATE_URLS } from './actions';
 
 export interface IAppState {
     contactBook: IContact[];
+    previousURL: string;
+    currentURL: string;
 }
 export const INITIAL_STATE: IAppState = {
-    contactBook: []
+    contactBook: [],
+    previousURL: "",
+    currentURL: ""
 }
 
 export function rootReducer(state, action) {
@@ -23,6 +27,12 @@ export function rootReducer(state, action) {
                     ]
                 }
             )
+        case UPDATE_URLS:
+            return {
+                ...state,
+                previousURL: action.payload.previousURL,
+                currentURL: action.payload.currentURL
+            };
         case LOAD_CONTACTS:
             return Object.assign({}, state, {
                 contactBook: state.contactBook = Object.assign({}, action.contacts)

@@ -7,6 +7,7 @@ import { CollapseDirective } from 'ngx-bootstrap';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { IAppState, rootReducer, INITIAL_STATE } from './store';
 import { createLogger } from 'redux-logger';
+import { RouterModule } from "@angular/router";
 
 import { AppComponent } from './app.component';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
@@ -24,7 +25,12 @@ import { ContactBookService } from './contact-book/contact-book-service';
   imports: [
     BrowserModule,
     NgReduxModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: "home", component: ContactBookComponent },
+      { path: "contact/:Id", component: ContactDetailComponent },
+      { path: "", redirectTo: "home", pathMatch: "full" }
+    ])
   ],
   providers: [
     ContactBookService,

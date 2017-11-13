@@ -2,13 +2,18 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ContactBookService } from './contact-book-service';
 import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from '../store';
-import { LOAD_CONTACTS, TOGGLE_FAVORITE } from '../actions';
+import { LOAD_CONTACTS, TOGGLE_FAVORITE, UPDATE_URLS } from '../actions';
 import { IContact } from './contact';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs/Observable';
+import { Router } from "@angular/router";
 
 export function selectFavoriteContacts(state) {
   return _.filter(_.values(state.contactBook[0]), { isFavorite: true });
+}
+
+export function selectNonFavoriteContacts(state) {
+  return _.filter(_.values(state.contactBook[0]), { isFavorite: false });
 }
 
 @Component({
@@ -21,10 +26,12 @@ export function selectFavoriteContacts(state) {
 export class ContactBookComponent implements OnInit {
   @select() contactBook: IContact[];
   @select(selectFavoriteContacts) favoriteContacts$: Observable<IContact[]>
+  @select(selectNonFavoriteContacts) nonFavoriteContacts$: Observable<IContact[]>
 
   constructor(
     private _contactBookService: ContactBookService,
-    private ngRedux: NgRedux<IAppState>
+    private ngRedux: NgRedux<IAppState>,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -37,11 +44,17 @@ export class ContactBookComponent implements OnInit {
       });
     });
   }
+
+  accessContactDetail(contactId) {
+    this.ngRedux.dispatch({
+      type: UPDATE_URLS,
+      payload: {
+        previousURL: "/home",
+        currentURL: "/contact/" + contactId
+      }
+    });
+
+    this.router.navigate(['contact', contactId]);
+    
+  }
 }
-
-  // function counterSelector(state){
-  //   console.log("Hola: " + JSON.stringify(state.contactBook[0]));
-
-  //   //return state;
-  //  return  state.contactBook[0].filter(x => x.isFavorite) === true;
-  // }  

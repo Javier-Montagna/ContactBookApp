@@ -26,10 +26,31 @@ body {
 }
 
 .name {
-    font-size: 1.7em;
-    font-weight: 700;
+    font-size: 1.3em;
+    font-weight: 350;
+    padding-top: 10px;
+}
+
+.panel-main-heading {
+    height: 80px;
+    color: #333;
+    background-color: #ccc;
+    border-color: #ddd;
+    text-align: center;
+    padding-top: 30px;
 }
 
 img, p {
     display:inline-block;
+}
+
+#contact-list li { 
+    padding-left: 0px; 
+}
+
+#contact-list li a { 
+    margin: 0px; 
+    display: block; 
+    width: 100%; 
+    height: 100%; 
 }
