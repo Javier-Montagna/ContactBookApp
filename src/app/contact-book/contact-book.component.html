@@ -1,7 +1,57 @@
-<p>
-  contact-book works! 
-</p>
-<p>
-  {{(contactBook | async)[0]?.name }}
-</p>
-<button (click)="testFav()" type="button" class="btn">Basic</button>
+<div *ngFor="let contact of (favoriteContacts$ | async)">
+  AAAAAAAAAAAAAAA - {{contact.name}}
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading c-list">
+          <span class="title">Contacts</span>
+        </div>
+        <ul class="list-group" id="contact-list">
+          <li *ngFor="let contact of (contactBook | async)[0]" class="list-group-item">
+            <div class="col-xs-12 col-sm-3">
+              <img src="../../assets/userIconSmall3x.png" class="img-responsive " />
+            </div>
+            <div class="col-xs-12 col-sm-9">
+
+              <div class="row">
+                <div class="col-md-4">
+                  <img src="../../assets/FavoriteTrue1x.png" class="img-responsive">
+                </div>
+                <div class="col-md-4">here text</div>
+              </div>
+
+              <!-- <div>
+                <div>
+                  <div *ngIf="contact.isFavorite">
+                    <img src="../../assets/FavoriteTrue1x.png" class="img-responsive">
+                  </div>
+                </div>
+                <div>
+                  <h4>{{contact.name}}</h4>
+                  <div>
+                    <span>{{contact.companyName}}</span>
+                  </div>
+                </div>
+              </div> -->
+
+              <!-- <div class="favoriteStatus">
+                <img src="../../assets/FavoriteTrue1x.png" class="img-responsive " />
+                <span class="name">{{contact.name}}</span>
+              </div>
+              <br/>
+              <span>
+                <span class="text-muted">{{contact.companyName}}</span>
+                <br/>
+              </span> -->
+            </div>
+            <div class="clearfix"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
