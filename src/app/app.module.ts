@@ -13,6 +13,8 @@ import { AppComponent } from './app.component';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 import { ContactBookComponent } from './contact-book/contact-book.component';
 import { ContactBookService } from './contact-book/contact-book-service';
+import { PhonePipe } from './pipes/phone-pipe';
+import { AddressPipe } from './pipes/address-pipe';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { ContactBookService } from './contact-book/contact-book-service';
     AppComponent,
     ContactDetailComponent,
     ContactBookComponent,
-    CollapseDirective
+    CollapseDirective,
+    PhonePipe,
+    AddressPipe
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,7 @@ import { ContactBookService } from './contact-book/contact-book-service';
     ])
   ],
   providers: [
-    ContactBookService,
+    ContactBookService
   ],
   bootstrap: [AppComponent]
 })

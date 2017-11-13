@@ -1,5 +1,6 @@
 import { IContact } from "./contact-book/contact";
 import { TOGGLE_FAVORITE, LOAD_CONTACTS, UPDATE_URLS } from './actions';
+import * as _ from 'lodash';
 
 export interface IAppState {
     contactBook: IContact[];
@@ -9,21 +10,21 @@ export interface IAppState {
 export const INITIAL_STATE: IAppState = {
     contactBook: [],
     previousURL: "",
-    currentURL: ""
+    currentURL: "/contact/1"
 }
 
 export function rootReducer(state, action) {
     switch (action.type) {
         case TOGGLE_FAVORITE:
-            var contact = state.contactBook.find(t => t.id === action.id);
-            var index = state.contactBook.indexOf(contact);
-
+            
+        var contact: IContact = _.find(_.values(state.contactBook[0]), { 'id': action.id });
+            var index = _.values(state.contactBook[0]).indexOf(contact);
             return Object.assign({}, state,
                 {
                     contactBook: [
-                        ...state.contactBook.slice(0, index),
+                        ..._.values(state.contactBook[0]).slice(0, index),
                         Object.assign({}, contact, { isFavorite: !contact.isFavorite }),
-                        ...state.contactBook.slice(index + 1)
+                        ..._.values(state.contactBook[0]).slice(index + 1)
                     ]
                 }
             )

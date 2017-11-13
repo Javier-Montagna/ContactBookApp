@@ -7,7 +7,8 @@ import * as _ from 'lodash';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from "@angular/router";
 
-export function selectContactByid(state){
+export function selectContactByid(state) {
+  console.log("Record: " + state.currentURL.split("/").pop());
   return _.filter(_.values(state.contactBook[0]), { id: state.currentURL.split("/").pop() });
 }
 
@@ -20,14 +21,22 @@ export function selectContactByid(state){
 
 export class ContactDetailComponent implements OnInit {
   @select(selectContactByid) contactInformation$: Observable<IContact>;
-  
+
+  private contactId: number = 0;
+
   constructor(
     private ngRedux: NgRedux<IAppState>,
     private _route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-
+    this.contactId = this._route.snapshot.params["Id"];
   }
 
+  toggleFavorite() {
+    this.ngRedux.dispatch({
+      type: "TOGGLE_FAVORITE",
+      id: this.contactId
+    });
+  }
 }

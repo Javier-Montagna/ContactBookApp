@@ -35,14 +35,7 @@ export class ContactBookComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._contactBookService.getContactBookList().subscribe(data => {
-      var sortedContacts = new Array(data.sort(function (a, b) { return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); }));
 
-      this.ngRedux.dispatch({
-        type: LOAD_CONTACTS,
-        contacts: Object.values(sortedContacts)
-      });
-    });
   }
 
   accessContactDetail(contactId) {
