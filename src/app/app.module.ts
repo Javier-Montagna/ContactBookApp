@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
 import { CollapseDirective } from 'ngx-bootstrap';
-
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { IAppState, rootReducer, INITIAL_STATE } from './store';
 import { createLogger } from 'redux-logger';
@@ -15,6 +13,7 @@ import { ContactBookComponent } from './contact-book/contact-book.component';
 import { ContactBookService } from './contact-book/contact-book-service';
 import { PhonePipe } from './pipes/phone-pipe';
 import { AddressPipe } from './pipes/address-pipe';
+import { ExtraComponent } from './extra/extra.component';
 
 
 @NgModule({
@@ -24,7 +23,8 @@ import { AddressPipe } from './pipes/address-pipe';
     ContactBookComponent,
     CollapseDirective,
     PhonePipe,
-    AddressPipe
+    AddressPipe,
+    ExtraComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +33,7 @@ import { AddressPipe } from './pipes/address-pipe';
     RouterModule.forRoot([
       { path: "home", component: ContactBookComponent },
       { path: "contact/:Id", component: ContactDetailComponent },
+      { path: "extra", component: ExtraComponent },
       { path: "", redirectTo: "home", pathMatch: "full" }
     ])
   ],
