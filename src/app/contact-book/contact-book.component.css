@@ -54,3 +54,7 @@ img, p {
     width: 100%; 
     height: 100%; 
 }
+
+.topAdjustment {
+    padding-top: 22px;
+}
