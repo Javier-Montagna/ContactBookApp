@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { CollapseDirective } from 'ngx-bootstrap';
+import { CollapseModule , AccordionModule  } from 'ngx-bootstrap';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { IAppState, rootReducer, INITIAL_STATE } from './store';
 import { createLogger } from 'redux-logger';
@@ -21,13 +21,15 @@ import { ExtraComponent } from './extra/extra.component';
     AppComponent,
     ContactDetailComponent,
     ContactBookComponent,
-    CollapseDirective,
+
     PhonePipe,
     AddressPipe,
     ExtraComponent
   ],
   imports: [
     BrowserModule,
+    CollapseModule.forRoot(),
+    AccordionModule.forRoot(),
     NgReduxModule,
     HttpClientModule,
     RouterModule.forRoot([

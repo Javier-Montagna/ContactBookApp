@@ -12,9 +12,4 @@ export class ContactBookService {
     getContactBookList(): Observable<IContact[]> {
         return this.http.get<IContact[]>(this._contactsURL);
     }
-
-    // private errorHandler(error: Response) {
-    //     console.error("Error: " + error);
-    //     return Observable.throw(error.json().error || "Server error");
-    // }
 }

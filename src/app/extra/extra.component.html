@@ -1,11 +1,71 @@
-<!-- <accordion>
-    <accordion-group heading="Header">
-      This content is straight in the template.
-    </accordion-group>
-    <accordion-group heading="Content 1">
-      <p>Content 1</p>
-    </accordion-group>
-    <accordion-group heading="Content 2">
-      <p>Content 2</p>
-    </accordion-group>
-  </accordion> -->
+<accordion>
+  <accordion-group #group>
+    <div accordion-heading>
+      Description of some of the technologies and package that were used!
+    </div>
+    <p><strong>Visual studio code:</strong> IDE used for development</p>
+    <br /><p><strong>Angular CLI:</strong> Command line interface for crating boilerplate code</p>
+    <br /><p><strong>bootstrap:</strong> Bootstrap v3 standard library for look and feel</p>
+    <br /><p><strong>express:</strong> Small JS server used for serving the data</p>
+    <br /><p><strong>lodash:</strong> JS library used for the data handeling and convertion</p>
+    <br /><p><strong>ngx-bootstrap:</strong> Bootstrap components adapted for angular </p>
+    <br /><p><strong>redux and angular-redux/store:</strong> Original redux implementation adapted to angular for JS store </p>
+    <br /><p><strong>redux-logger:</strong> Middleware in charge of logging all dispatched actions</p>
+  </accordion-group>
+  <accordion-group #group>
+    <div accordion-heading>
+      Solution explained
+    </div>
+    <p>Angular CLI was used to generate the boiler plate of the application and then the folder structure was created</p>
+    CONTACTBOOKAPP
+    <ul>
+       <li>dist: PROD Version of the code</li>
+       <li>src:</li>
+        <ul>
+            <li>app: Holds the entire application</li>
+            <ul>
+              <li>contact-book: Hold the component that shows the main contact book</li>
+              <li>contact-detail: Holds the component that shows the detail contact information</li>
+              <li>extra: Has this page on it :P</li>
+              <li>pipes: Holds the custom pipes for phone and address customizatoin</li>
+            </ul>
+            <li>assets: Holds all imgs </li>
+            <li>server: Holds the express server used for serving the data</li>
+        </ul>
+    </ul>
+  </accordion-group>
+  <accordion-group #group>
+    <div accordion-heading>
+      Known Issue
+    </div>
+    When trying to access the amazon server from localhost to fetch the data a CORS issue was found, to bypass this an express server was created and on it a get method was define to pick up the data on a local file and send it 
+  </accordion-group>
+  <accordion-group #group>
+    <div accordion-heading>
+      Running the code
+    </div>
+    For executing the code please follow these steps:<br>
+    <ol>
+      <li>Clone or download the following repo: https://github.com/Javier-Montagna/ContactBookApp.git</li>
+      <li>Open the code (For example with visual studio code)</li>
+      <li>Execute npm install</li>
+      <li>Execute ng serve/npm start</li>
+      <li>Open a second terminal</li>
+      <li>Go to ContactBookApp\src\server</li>
+      <li>Execute node .\server.js (You should see: the server is available on http://localhost:9001/)</li>
+      <li>Visit http://localhost:4200 and use the app</li>
+    </ol>
+    If you want to ran the PROD build follow these steps:
+    <ol>
+      <li>Clone or download the following repo: </li>
+      <li>Open the code (For example with visual studio code)</li>
+      <li>Execute npm install</li>
+      <li>Execute ng build --prod --aot</li>
+      <li>Execute npm install http-server -g</li>
+      <li>Go to ContactBookApp\src\server</li>
+      <li>Execute node .\server.js (You should see: the server is available on http://localhost:9001/)</li>
+      <li>Execute http-server ./dist (on the ContactBookApp root folder)</li>
+      <li>Visit 127.0.0.1:8080 and use the app</li>
+    </ol>
+  </accordion-group>
+</accordion>
