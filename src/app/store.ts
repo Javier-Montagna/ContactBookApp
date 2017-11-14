@@ -4,30 +4,32 @@ import * as _ from 'lodash';
 
 export interface IAppState {
     contactBook: IContact[];
+    selectedContact: IContact;
     previousURL: string;
     currentURL: string;
+    areContactUpToDate: boolean;
 }
 export const INITIAL_STATE: IAppState = {
     contactBook: [],
+    selectedContact: null,
     previousURL: "",
-    currentURL: "/contact/1"
+    currentURL: "",
+    areContactUpToDate: false
 }
 
-export function rootReducer(state, action) {
+export function rootReducer(state: IAppState, action): IAppState {
     switch (action.type) {
         case TOGGLE_FAVORITE:
-            
-        var contact: IContact = _.find(_.values(state.contactBook[0]), { 'id': action.id });
-            var index = _.values(state.contactBook[0]).indexOf(contact);
-            return Object.assign({}, state,
-                {
-                    contactBook: [
-                        ..._.values(state.contactBook[0]).slice(0, index),
-                        Object.assign({}, contact, { isFavorite: !contact.isFavorite }),
-                        ..._.values(state.contactBook[0]).slice(index + 1)
-                    ]
-                }
-            )
+            var contact: IContact = _.find(_.values(state.contactBook), { 'id': action.id });
+            var index = _.values(state.contactBook).indexOf(contact);
+
+            return Object.assign({}, state, {
+                contactBook: [
+                    ..._.values(state.contactBook).slice(0, index),
+                    Object.assign({}, contact, { isFavorite: !contact.isFavorite }),
+                    ..._.values(state.contactBook).slice(index + 1)
+                ]
+            })
         case UPDATE_URLS:
             return {
                 ...state,
@@ -35,10 +37,15 @@ export function rootReducer(state, action) {
                 currentURL: action.payload.currentURL
             };
         case LOAD_CONTACTS:
-            return Object.assign({}, state, {
-                contactBook: state.contactBook = Object.assign({}, action.contacts)
-            })
-        default:
-            return state;
+            if (state.areContactUpToDate) {
+                return state;
+            }
+            else {
+                return Object.assign({}, state, {
+                    contactBook: Object.assign({}, action.contacts[0]),
+                    areContactUpToDate: true
+                })
+            }
     }
+    return state;
 }

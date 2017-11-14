@@ -9,11 +9,11 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from "@angular/router";
 
 export function selectFavoriteContacts(state) {
-  return _.filter(_.values(state.contactBook[0]), { isFavorite: true });
+  return _.filter(_.values(state.contactBook), { isFavorite: true });
 }
 
 export function selectNonFavoriteContacts(state) {
-  return _.filter(_.values(state.contactBook[0]), { isFavorite: false });
+  return _.filter(_.values(state.contactBook), { isFavorite: false });
 }
 
 @Component({
@@ -24,7 +24,6 @@ export function selectNonFavoriteContacts(state) {
 })
 
 export class ContactBookComponent implements OnInit {
-  @select() contactBook: IContact[];
   @select(selectFavoriteContacts) favoriteContacts$: Observable<IContact[]>
   @select(selectNonFavoriteContacts) nonFavoriteContacts$: Observable<IContact[]>
 
@@ -32,7 +31,16 @@ export class ContactBookComponent implements OnInit {
     private _contactBookService: ContactBookService,
     private ngRedux: NgRedux<IAppState>,
     private router: Router
-  ) { }
+  ) { 
+    this._contactBookService.getContactBookList().subscribe(data => {
+      var sortedContacts = new Array(data.sort(function (a, b) { return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0); }));
+  
+      this.ngRedux.dispatch({
+        type: LOAD_CONTACTS,
+        contacts: Object.values(sortedContacts)
+      });
+    });
+  }
 
   ngOnInit() {
 
@@ -47,7 +55,11 @@ export class ContactBookComponent implements OnInit {
       }
     });
 
-    this.router.navigate(['contact', contactId]);
-    
+    // this.ngRedux.dispatch({
+    //   type: SELECT_CONTACT,
+    //   id: contactId
+    // });
+
+    this.router.navigate(['contact', contactId]);    
   }
 }

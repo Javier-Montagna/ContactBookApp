@@ -1,100 +1,97 @@
 <div *ngIf="(contactInformation$ | async)">
-  Testing this:
-  {{(contactInformation$ | async).name}}
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
-      <div *ngFor="let info of (contactInformation$ | async)" class="panel panel-default ">
-        <div class="panel-main-heading c-list">
-          <div class="media title">
-            <div class="media-body leftAlign">
-              <a href="#">
-                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                <span>Contacts</span>
-              </a>
-            </div>
-            <div class="media-right">
-              <a (click)="toggleFavorite()">
-                <img  *ngIf="info.isFavorite" src="../../assets/FavoriteTrue1x.png" class="media-object favImg">
-                <img *ngIf="!info.isFavorite" src="../../assets/FavoriteFalse3x.png" class="media-object favImg">
-              </a>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+        <div class="panel panel-default ">
+          <div class="panel-main-heading c-list">
+            <div class="media title">
+              <div class="media-body leftAlign">
+                <a routerLink="/home">
+                  <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                  <span>Contacts</span>
+                </a>
+              </div>
+              <div class="media-right">
+                <a (click)="toggleFavorite()">
+                  <img *ngIf="(contactInformation$ | async)?.isFavorite" src="../../assets/FavoriteTrue1x.png" class="media-object favImg">
+                  <img *ngIf="!(contactInformation$ | async)?.isFavorite" src="../../assets/FavoriteFalse3x.png" class="media-object favImg">
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-        <ul class="list-group" id="contact-list">
-          <li class="list-group-item">
-            <div>
-              <img src="../../assets/userIconLarge3x.png" class="img-responsive contact-img" />
-            </div>
-            <div class="centerAlign">
-              <h2>{{info.name}}</h2>
-              <p class="mutedText">{{info.companyName}}</p>
-            </div>
-          </li>
-          <li *ngIf="info.phone.home" class="list-group-item contactData">
-            <div class="media">
-              <div class="media-body">
-                <h4 class="media-heading mutedText">PHONE:</h4>
-                <strong>{{info.phone.home | phone}}</strong>
+          <ul class="list-group" id="contact-list">
+            <li class="list-group-item">
+              <div>
+                <img src="../../assets/userIconLarge3x.png" class="img-responsive contact-img" />
               </div>
-              <div class="media-right">
-                <p class="mutedText">Home</p>
+              <div class="centerAlign">
+                <h2>{{(contactInformation$ | async)?.name}}</h2>
+                <p class="mutedText">{{(contactInformation$ | async)?.companyName}}</p>
               </div>
-            </div>
-          </li>
-          <li *ngIf="info.phone.mobile" class="list-group-item contactData">
-            <div class="media">
-              <div class="media-body">
-                <h4 class="media-heading mutedText">PHONE:</h4>
-                <strong>{{info.phone.mobile | phone}}</strong>
-              </div>
-              <div class="media-right">
-                <p class="mutedText">Mobile</p>
-              </div>
-            </div>
-          </li>
-          <li *ngIf="info.phone.work" class="list-group-item contactData">
-            <div class="media">
-              <div class="media-body">
-                <h4 class="media-heading mutedText">PHONE:</h4>
-                <strong>{{info.phone.work | phone}}</strong>
-              </div>
-              <div class="media-right">
-                <p class="mutedText">Work</p>
-              </div>
-            </div>
-          </li>
-          <li *ngIf="info.address.street" class="list-group-item contactData">
-            <div class="media">
-              <div class="media-body">
-                <h4 class="media-heading mutedText">ADDRESS:</h4>
-                <div class="address">
-                  <strong>{{info.address.street }}</strong>
-                  <br />
-                  <strong>{{info.address | address}}</strong>
+            </li>
+            <li *ngIf="(contactInformation$ | async)?.phone.home" class="list-group-item contactData">
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading mutedText">PHONE:</h4>
+                  <strong>{{(contactInformation$ | async)?.phone.home | phone}}</strong>
+                </div>
+                <div class="media-right">
+                  <p class="mutedText">Home</p>
                 </div>
               </div>
-            </div>
-          </li>
-          <li *ngIf="info.birthdate" class="list-group-item contactData">
-            <div class="media">
-              <div class="media-body">
-                <h4 class="media-heading mutedText">BIRTH DATE:</h4>
-                <strong>{{info.birthdate | date:'longDate'}}</strong>
+            </li>
+            <li *ngIf="(contactInformation$ | async)?.phone.mobile" class="list-group-item contactData">
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading mutedText">PHONE:</h4>
+                  <strong>{{(contactInformation$ | async)?.phone.mobile | phone}}</strong>
+                </div>
+                <div class="media-right">
+                  <p class="mutedText">Mobile</p>
+                </div>
               </div>
-            </div>
-          </li>
-          <li *ngIf="info.emailAddress" class="list-group-item contactData">
-            <div class="media">
-              <div class="media-body">
-                <h4 class="media-heading mutedText">EMAIL:</h4>
-                <strong>{{info.emailAddress}}</strong>
+            </li>
+            <li *ngIf="(contactInformation$ | async)?.phone.work" class="list-group-item contactData">
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading mutedText">PHONE:</h4>
+                  <strong>{{(contactInformation$ | async)?.phone.work | phone}}</strong>
+                </div>
+                <div class="media-right">
+                  <p class="mutedText">Work</p>
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+            <li *ngIf="(contactInformation$ | async)?.address.street" class="list-group-item contactData">
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading mutedText">ADDRESS:</h4>
+                  <div class="address">
+                    <strong>{{(contactInformation$ | async)?.address.street }}</strong>
+                    <br />
+                    <strong>{{(contactInformation$ | async)?.address | address}}</strong>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li *ngIf="(contactInformation$ | async)?.birthdate" class="list-group-item contactData">
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading mutedText">BIRTH DATE:</h4>
+                  <strong>{{(contactInformation$ | async)?.birthdate | date:'longDate'}}</strong>
+                </div>
+              </div>
+            </li>
+            <li *ngIf="(contactInformation$ | async)?.emailAddress" class="list-group-item contactData">
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading mutedText">EMAIL:</h4>
+                  <strong>{{(contactInformation$ | async)?.emailAddress}}</strong>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
